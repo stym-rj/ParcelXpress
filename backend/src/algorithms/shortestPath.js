@@ -11,7 +11,7 @@ class Graph {
             this.graph.set(dest, []);
         }
         this.graph.get(src).push({ dest, weight });
-        this.graph.get(dest).push({ dest: src, weight }); // Assuming bidirectional edges
+        this.graph.get(dest).push({ dest: src, weight });
     }
 
     shortestPathUsingDijkstra(src) {
@@ -20,7 +20,6 @@ class Graph {
         const visited = new Map();
         const pq = new PriorityQueue();
 
-        // Initialize distances and previous nodes
         for (let node of this.graph.keys()) {
             dist.set(node, Infinity);
             prev.set(node, null);
@@ -119,10 +118,10 @@ class PriorityQueue {
     }
 }
 
-// Usage example
+// initialisation
 const g = new Graph();
 
-// Add edges
+// Dummy data
 const connections = [
     ["New Delhi", "Kolkata", 1500],
     ["Varanasi", "Hyderabad", 1200],
@@ -162,7 +161,95 @@ const connections = [
     ["Raipur", "Nagpur", 260],
     ["Nagpur", "Jabalpur", 290],
     ["Jabalpur", "Bhopal", 220],
-    ["Bhopal", "Indore", 240]
+    ["Bhopal", "Indore", 240],
+    ["Thiruvananthapuram", "Kochi", 190],
+    ["Kochi", "Kozhikode", 200],
+    ["Kozhikode", "Kannur", 90],
+    ["Kannur", "Mangalore", 140],
+    ["Dehradun", "Haridwar", 55],
+    ["Haridwar", "Rishikesh", 20],
+    ["Rishikesh", "Srinagar", 780],
+    ["Jammu", "Srinagar", 290],
+    ["Shimla", "Manali", 270],
+    ["Manali", "Leh", 470],
+    ["Guwahati", "Dibrugarh", 450],
+    ["Dibrugarh", "Tinsukia", 80],
+    ["Patna", "Gaya", 100],
+    ["Gaya", "Bodh Gaya", 13],
+    ["Lucknow", "Kanpur", 80],
+    ["Kanpur", "Agra", 230],
+    ["Agra", "Jaipur", 230],
+    ["Bhubaneswar", "Puri", 60],
+    ["Puri", "Konark", 35],
+    ["Jodhpur", "Udaipur", 250],
+    ["Udaipur", "Jaisalmer", 330],
+    ["Jaisalmer", "Bikaner", 300],
+    ["Bikaner", "Jaipur", 330],
+    ["Gangtok", "Pelling", 70],
+    ["Pelling", "Darjeeling", 110],
+    ["Darjeeling", "Kalimpong", 50],
+    ["Kalimpong", "Siliguri", 65],
+    ["Alipurduar", "Guwahati", 220],
+    ["Srinagar", "Pahalgam", 90],
+    ["Pahalgam", "Gulmarg", 14],
+    ["Gulmarg", "Sonmarg", 80],
+    ["Sonmarg", "Kargil", 140],
+    ["Ahmedabad", "Daman", 170],
+    ["Daman", "Diu", 65],
+    ["Diu", "Somnath", 230],
+    ["Kochi", "Alappuzha", 55],
+    ["Alappuzha", "Kumarakom", 25],
+    ["Kumarakom", "Kovalam", 180],
+    ["Kovalam", "Thiruvananthapuram", 16],
+    ["Mysore", "Ooty", 120],
+    ["Ooty", "Coonoor", 22],
+    ["Coonoor", "Coimbatore", 60],
+    ["Bhubaneswar", "Cuttack", 30],
+    ["Cuttack", "Paradeep", 80],
+    ["Paradeep", "Puri", 100],
+    ["Ranchi", "Jamshedpur", 130],
+    ["Jamshedpur", "Kolkata", 270],
+    ["Indore", "Gwalior", 200],
+    ["Gwalior", "Agra", 210],
+    ["Chandigarh", "Dehradun", 180],
+    ["Dehradun", "Mussoorie", 30],
+    ["Mussoorie", "Nainital", 65],
+    ["Nainital", "Kathgodam", 34],
+    ["Kathgodam", "Haldwani", 22],
+    ["Jammu", "Katra", 42],
+    ["Shimla", "Dalhousie", 150],
+    ["Dalhousie", "Khajjiar", 16],
+    ["Khajjiar", "Chamba", 20],
+    ["Darjeeling", "Kurseong", 30],
+    ["Kurseong", "Mirik", 20],
+    ["Mirik", "Lava", 50],
+    ["Lava", "Loleygaon", 35],
+    ["Munnar", "Thekkady", 110],
+    ["Thekkady", "Alleppey", 150],
+    ["Daman", "Silvassa", 15],
+    ["Silvassa", "Surat", 160],
+    ["Kanchipuram", "Mahabalipuram", 58],
+    ["Mahabalipuram", "Pondicherry", 80],
+    ["Pondicherry", "Chidambaram", 65],
+    ["Chidambaram", "Kumbakonam", 40],
+    ["Kumbakonam", "Thanjavur", 42],
+    ["Ranakpur", "Jodhpur", 220],
+    ["Aurangabad", "Shirdi", 100],
+    ["Shirdi", "Nashik", 50],
+    ["Nashik", "Pune", 170],
+    ["Khajuraho", "Orchha", 170],
+    ["Orchha", "Gwalior", 90],
+    ["Hampi", "Badami", 240],
+    ["Badami", "Pattadakal", 20],
+    ["Pattadakal", "Aihole", 10],
+    ["Kanyakumari", "Rameshwaram", 160],
+    ["Rameshwaram", "Dhanushkodi", 20],
+    ["Kovalam", "Poovar", 22],
+    ["Poovar", "Kottayam", 130],
+    ["Kottayam", "Munnar", 115],
+    ["Darjeeling", "Gangtok", 100],
+    ["Coorg", "Wayanad", 140],
+    ["Wayanad", "Mysore", 85],
 ];
 
 connections.forEach(connection => {
@@ -170,13 +257,15 @@ connections.forEach(connection => {
 });
 
 // Compute shortest path
-const { dist, prev } = g.shortestPathUsingDijkstra("New Delhi");
+var source = "Goa";
+var destination = "Mumbai";
+const { dist, prev } = g.shortestPathUsingDijkstra(source);
 
-// Reconstruct and print path
-const path = g.reconstructPath("New Delhi", "Goa", prev);
+// for finding route path
+const path = g.reconstructPath(source, destination, prev);
 if (path.length > 0) {
     console.log(path);
-    console.log("cost:", dist.get("Goa"));
+    console.log("cost:", dist.get(destination));
 } else {
-    console.log("No path found from New Delhi to Goa");
+    console.log(`No path found from ${source} to ${destination}`);
 }
